@@ -9,9 +9,12 @@ import {
 } from "@expo-google-fonts/nunito-sans";
 import Button from "@components/Button";
 import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
+import Select, { Options } from "@components/Select";
+import React from "react";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
+  const [option, setOption] = React.useState<Options>(null);
 
   return (
     <ThemeProvider theme={theme}>
@@ -23,7 +26,8 @@ export default function App() {
             CustomIcon={PencilSimpleLine}
             type="SECONDARY"
           />
-
+          <Button title="Label" CustomIcon={PencilSimpleLine} type="PRIMARY" />
+          <Select option={option} setOption={setOption} />
           <StatusBar style="auto" />
         </View>
       )}
@@ -37,5 +41,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    gap: 10,
   },
 });

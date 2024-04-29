@@ -13,6 +13,7 @@ export const Container = styled(Animated.View)`
 
   padding: 16px 24px;
   flex-direction: row;
+  align-items: center;
   gap: 12px;
 
   border: 1px solid ${({ theme }) => theme.COLORS.GRAY_700};
