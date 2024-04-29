@@ -7,16 +7,26 @@ import {
   NunitoSans_400Regular,
   NunitoSans_700Bold,
 } from "@expo-google-fonts/nunito-sans";
+import Button from "@components/Button";
+import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
 
   return (
     <ThemeProvider theme={theme}>
-      <View style={styles.container}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View>
+      {fontsLoaded && (
+        <View style={styles.container}>
+          <Text>Open up App.tsx to start working on your app!</Text>
+          <Button
+            title="Label"
+            CustomIcon={PencilSimpleLine}
+            type="SECONDARY"
+          />
+
+          <StatusBar style="auto" />
+        </View>
+      )}
     </ThemeProvider>
   );
 }
