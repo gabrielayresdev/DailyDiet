@@ -12,6 +12,8 @@ import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
 import Select, { Options } from "@components/Select";
 import React from "react";
 import Input from "@components/Input";
+import AnimatedStatusBar from "@components/AnimatedStatusBar";
+import { StatusBarProvider } from "src/contexts/StatusBarContext";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -21,18 +23,24 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       {fontsLoaded && (
-        <View style={styles.container}>
-          <Text>Open up App.tsx to start working on your app!</Text>
-          <Button
-            title="Label"
-            CustomIcon={PencilSimpleLine}
-            type="SECONDARY"
-          />
-          <Button title="Label" CustomIcon={PencilSimpleLine} type="PRIMARY" />
-          <Select option={option} setOption={setOption} />
-          <Input value={value} setValue={setValue} />
-          <StatusBar style="auto" />
-        </View>
+        <StatusBarProvider>
+          <View style={styles.container}>
+            <Text>Open up App.tsx to start working on your app!</Text>
+            <Button
+              title="Label"
+              CustomIcon={PencilSimpleLine}
+              type="SECONDARY"
+            />
+            <Button
+              title="Label"
+              CustomIcon={PencilSimpleLine}
+              type="PRIMARY"
+            />
+            <Select option={option} setOption={setOption} />
+            <Input value={value} setValue={setValue} />
+            <AnimatedStatusBar />
+          </View>
+        </StatusBarProvider>
       )}
     </ThemeProvider>
   );

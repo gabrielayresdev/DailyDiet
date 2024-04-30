@@ -3,7 +3,7 @@ import { Animated, TextInput } from "react-native";
 
 export const Container = styled.View`
   width: 100%;
-  gap: 4;
+  gap: 4px;
 `;
 
 export const InputField = styled(Animated.createAnimatedComponent(TextInput))`
