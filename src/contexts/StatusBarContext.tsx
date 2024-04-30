@@ -12,11 +12,11 @@ const StatusBarContext = React.createContext<StatusBarContextValue | null>(
   null
 );
 
-type Options = 0 | 1 | 2 | 3;
+type Options = "WHITE" | "LIGHT_GREEN" | "LIGHT_RED" | "LIGHT_GRAY";
 
 export const StatusBarProvider = ({ children }: React.PropsWithChildren) => {
   const theme = useTheme();
-  const currentStatus = new Animated.Value(1);
+  const currentStatus = new Animated.Value(0);
   // 0 - theme.COLORS.GRAY_100
   // 1 - theme.COLORS.GREEN_LIGHT
   // 2 - theme.COLORS.RED_LIGHT
@@ -32,9 +32,16 @@ export const StatusBarProvider = ({ children }: React.PropsWithChildren) => {
     ],
   });
 
+  const StatusEnum = {
+    WHITE: 0,
+    LIGHT_GREEN: 1,
+    LIGHT_RED: 2,
+    LIGHT_GRAY: 3,
+  };
+
   const handleChange = (style: Options) => {
     Animated.timing(currentStatus, {
-      toValue: style,
+      toValue: StatusEnum[style],
       duration: 300,
       useNativeDriver: false,
     }).start();
