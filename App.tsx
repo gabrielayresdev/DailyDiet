@@ -11,10 +11,12 @@ import Button from "@components/Button";
 import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
 import Select, { Options } from "@components/Select";
 import React from "react";
+import Input from "@components/Input";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
   const [option, setOption] = React.useState<Options>(null);
+  const [value, setValue] = React.useState("");
 
   return (
     <ThemeProvider theme={theme}>
@@ -28,6 +30,7 @@ export default function App() {
           />
           <Button title="Label" CustomIcon={PencilSimpleLine} type="PRIMARY" />
           <Select option={option} setOption={setOption} />
+          <Input value={value} setValue={setValue} />
           <StatusBar style="auto" />
         </View>
       )}
@@ -42,5 +45,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 10,
+    padding: 16,
   },
 });
