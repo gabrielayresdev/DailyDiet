@@ -53,4 +53,8 @@ export const StatusBarProvider = ({ children }: React.PropsWithChildren) => {
   );
 };
 
-export const useStatusBar = () => React.useContext(StatusBarContext);
+export function useStatusBar() {
+  const context = React.useContext(StatusBarContext);
+  if (!context) throw new Error("useContext must be inside provider");
+  else return context;
+}
