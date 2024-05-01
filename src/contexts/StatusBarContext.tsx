@@ -5,7 +5,7 @@ import { useTheme } from "styled-components/native";
 
 type StatusBarContextValue = {
   StatusBarStyles: Animated.AnimatedInterpolation<string | number>;
-  handleChange: (style: Options) => void;
+  handleChange: (style: Options, time?: number) => void;
 };
 
 const StatusBarContext = React.createContext<StatusBarContextValue | null>(
@@ -21,6 +21,12 @@ export const StatusBarProvider = ({ children }: React.PropsWithChildren) => {
   // 1 - theme.COLORS.GREEN_LIGHT
   // 2 - theme.COLORS.RED_LIGHT
   // 3 - theme.COLORS.GRAY_300
+  const StatusEnum = {
+    WHITE: 0,
+    LIGHT_GREEN: 1,
+    LIGHT_RED: 2,
+    LIGHT_GRAY: 3,
+  };
 
   const StatusBarStyles = currentStatus.interpolate({
     inputRange: [0, 1, 2, 3],
@@ -32,17 +38,10 @@ export const StatusBarProvider = ({ children }: React.PropsWithChildren) => {
     ],
   });
 
-  const StatusEnum = {
-    WHITE: 0,
-    LIGHT_GREEN: 1,
-    LIGHT_RED: 2,
-    LIGHT_GRAY: 3,
-  };
-
-  const handleChange = (style: Options) => {
+  const handleChange = (style: Options, time: number = 300) => {
     Animated.timing(currentStatus, {
       toValue: StatusEnum[style],
-      duration: 300,
+      duration: time,
       useNativeDriver: false,
     }).start();
   };

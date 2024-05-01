@@ -14,6 +14,7 @@ import React from "react";
 import Input from "@components/Input";
 import AnimatedStatusBar from "@components/AnimatedStatusBar";
 import { StatusBarProvider } from "src/contexts/StatusBarContext";
+import AddMead from "@screens/AddMeal";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -24,7 +25,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       {fontsLoaded && (
         <StatusBarProvider>
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
             <Text>Open up App.tsx to start working on your app!</Text>
             <Button
               title="Label"
@@ -39,7 +40,9 @@ export default function App() {
             <Select option={option} setOption={setOption} />
             <Input value={value} setValue={setValue} />
             <AnimatedStatusBar />
-          </View>
+          </View> */}
+          <AddMead />
+          <AnimatedStatusBar />
         </StatusBarProvider>
       )}
     </ThemeProvider>
