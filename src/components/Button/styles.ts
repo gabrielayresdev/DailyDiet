@@ -7,7 +7,16 @@ type Props = {
   type: ButtonTypeStyleProps;
 };
 
-export const Container = styled(Animated.View)`
+export type ButtonStyleProps = {
+  flex?: boolean;
+};
+
+export const Container = styled(Animated.View)<ButtonStyleProps>`
+  ${({ flex }) =>
+    flex &&
+    css`
+      flex: 1;
+    `}
   border-radius: 6px;
   overflow: hidden;
 

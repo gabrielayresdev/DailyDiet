@@ -4,12 +4,12 @@ import { Animated, TextInputProps } from "react-native";
 import { useTheme } from "styled-components/native";
 
 type Props = TextInputProps & {
+  label?: string;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Input = ({ value, setValue, ...rest }: Props) => {
-  const [focused, setFocused] = React.useState(false);
+const Input = ({ label, value, setValue, ...rest }: Props) => {
   const isFocused = new Animated.Value(0);
   const theme = useTheme();
 
@@ -40,7 +40,7 @@ const Input = ({ value, setValue, ...rest }: Props) => {
   //
   return (
     <Container>
-      <Label onPress={() => setFocused(!focused)}>Label</Label>
+      {label && <Label>{label}</Label>}
       <InputField
         {...rest}
         onFocus={handleFocus}

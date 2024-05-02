@@ -1,6 +1,11 @@
 import React from "react";
 import { Animated, ButtonProps, TouchableWithoutFeedback } from "react-native";
-import { ButtonTypeStyleProps, Container, Title } from "./styles";
+import {
+  ButtonStyleProps,
+  ButtonTypeStyleProps,
+  Container,
+  Title,
+} from "./styles";
 import { Icon, IconContext } from "phosphor-react-native/src/lib/";
 import { useTheme } from "styled-components/native";
 
@@ -9,6 +14,7 @@ type Props = ButtonProps & {
   title: string;
   type?: ButtonTypeStyleProps;
   handlePress?: () => void;
+  buttonStyle?: ButtonStyleProps;
 };
 
 const Button = ({
