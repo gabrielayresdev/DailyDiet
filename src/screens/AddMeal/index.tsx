@@ -26,6 +26,7 @@ const AddMead = () => {
           value={description}
           setValue={setDescription}
           label="Descrição"
+          numberOfLines={4}
         />
         <FormRow>
           <Input value={date} setValue={setDate} label="Data" />
