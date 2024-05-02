@@ -7,11 +7,9 @@ import { useStatusBar } from "src/contexts/StatusBarContext";
 const AnimatedStatusBar = () => {
   const context = useStatusBar();
 
-  React.useEffect(() => {
-    console.log(context?.handleChange);
-  }, [context]);
-
-  return <Container backgroundColor={context?.StatusBarStyles}></Container>;
+  if (context)
+    return <Container backgroundColor={context?.StatusBarStyles}></Container>;
+  else return null;
 };
 
 export default AnimatedStatusBar;

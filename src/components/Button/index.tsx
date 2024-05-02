@@ -1,11 +1,6 @@
 import React from "react";
 import { Animated, ButtonProps, TouchableWithoutFeedback } from "react-native";
-import {
-  ButtonStyleProps,
-  ButtonTypeStyleProps,
-  Container,
-  Title,
-} from "./styles";
+import { ButtonTypeStyleProps, Container, Title } from "./styles";
 import { Icon, IconContext } from "phosphor-react-native/src/lib/";
 import { useTheme } from "styled-components/native";
 
@@ -14,7 +9,6 @@ type Props = ButtonProps & {
   title: string;
   type?: ButtonTypeStyleProps;
   handlePress?: () => void;
-  buttonStyle?: ButtonStyleProps;
 };
 
 const Button = ({
@@ -31,14 +25,14 @@ const Button = ({
   function handlePressIn() {
     Animated.timing(isPressed, {
       toValue: 1,
-      duration: 300,
+      duration: 100,
       useNativeDriver: false,
     }).start();
   }
   function handlePressOut() {
     Animated.timing(isPressed, {
       toValue: 0,
-      duration: 300,
+      duration: 100,
       useNativeDriver: false,
     }).start();
   }

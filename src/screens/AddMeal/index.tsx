@@ -36,7 +36,7 @@ const AddMead = () => {
           <SelectTitle>Está dentro da dieta?</SelectTitle>
           <Select option={option} setOption={setOption} />
         </View>
-        <Button title="Cadastrar refeição" buttonStyle={{ flex: true }} />
+        <Button title="Cadastrar refeição" />
       </Form>
     </Container>
   );
