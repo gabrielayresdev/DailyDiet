@@ -28,3 +28,7 @@ export const SelectTitle = styled.Text`
   `}
   margin-bottom: 8px;
 `;
+
+export const ButtonContainer = styled.View`
+  margin-top: auto;
+`;

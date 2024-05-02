@@ -6,7 +6,11 @@ export const Container = styled.View`
   gap: 4px;
 `;
 
-export const InputField = styled(Animated.createAnimatedComponent(TextInput))`
+export const InputField = styled(
+  Animated.createAnimatedComponent(TextInput)
+).attrs(() => ({
+  textAlignVertical: "top",
+}))`
   ${({ theme }) => css`
     border: 1px solid ${theme.COLORS.GRAY_300};
     font-size: ${theme.FONT_SIZE.MD}px;

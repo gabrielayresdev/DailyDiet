@@ -1,6 +1,12 @@
 import Header from "@components/Header";
 import React from "react";
-import { Container, Form, FormRow, SelectTitle } from "./styles";
+import {
+  ButtonContainer,
+  Container,
+  Form,
+  FormRow,
+  SelectTitle,
+} from "./styles";
 import { useTheme } from "styled-components/native";
 import { useStatusBar } from "src/contexts/StatusBarContext";
 import Input from "@components/Input";
@@ -36,7 +42,9 @@ const AddMead = () => {
           <SelectTitle>Está dentro da dieta?</SelectTitle>
           <Select option={option} setOption={setOption} />
         </View>
-        <Button title="Cadastrar refeição" />
+        <ButtonContainer>
+          <Button title="Cadastrar refeição" />
+        </ButtonContainer>
       </Form>
     </Container>
   );
