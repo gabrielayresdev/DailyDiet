@@ -15,7 +15,6 @@ const Input = ({ label, value, setValue, ...rest }: Props) => {
 
   // Handles with input color change animations
   const handleFocus = () => {
-    console.log("Focado");
     Animated.timing(isFocused, {
       toValue: 1,
       duration: 300,
@@ -23,7 +22,6 @@ const Input = ({ label, value, setValue, ...rest }: Props) => {
     }).start();
   };
   const handleBlur = () => {
-    console.log("Não Focado");
     Animated.timing(isFocused, {
       toValue: 0,
       duration: 300,

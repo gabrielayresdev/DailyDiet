@@ -1,13 +1,14 @@
 import React from "react";
-import { Animated, ButtonProps, TouchableWithoutFeedback } from "react-native";
+import { Animated, TouchableWithoutFeedback, ViewProps } from "react-native";
 import { ButtonTypeStyleProps, Container, Title } from "./styles";
 import { Icon, IconContext } from "phosphor-react-native/src/lib/";
 import { useTheme } from "styled-components/native";
 
-type Props = ButtonProps & {
+type Props = ViewProps & {
   CustomIcon?: Icon;
   title: string;
   type?: ButtonTypeStyleProps;
+  fill?: boolean;
   handlePress?: () => void;
 };
 
@@ -16,6 +17,7 @@ const Button = ({
   title,
   type = "PRIMARY",
   handlePress,
+  fill = true,
   ...rest
 }: Props) => {
   const theme = useTheme();
@@ -49,7 +51,7 @@ const Button = ({
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
     >
-      <Container style={{ backgroundColor: buttonColor }} {...rest}>
+      <Container style={{ backgroundColor: buttonColor }} fill={fill} {...rest}>
         {CustomIcon && (
           <IconContext.Provider
             value={{

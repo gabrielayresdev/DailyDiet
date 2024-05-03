@@ -7,16 +7,19 @@ type Props = {
   type: ButtonTypeStyleProps;
 };
 
-export const Container = styled(Animated.View)`
-  width: 100%;
+export const Container = styled(Animated.View)<{ fill: boolean }>`
+  ${({ fill }) =>
+    fill &&
+    css`
+      width: 100%;
+    `}
   border-radius: 6px;
   overflow: hidden;
-
-  justify-content: center;
 
   padding: 16px 24px;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 12px;
 
   border: 1px solid ${({ theme }) => theme.COLORS.GRAY_700};
