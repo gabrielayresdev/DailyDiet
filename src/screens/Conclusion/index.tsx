@@ -10,7 +10,6 @@ import {
 import imgSuccess from "@assets/illustrations/Illustration-success.png";
 import imgFailure from "@assets/illustrations/Illustration-fail.png";
 import Button from "@components/Button";
-import { View } from "react-native";
 
 const Conclusion = () => {
   const type: "SUCCESS" | "FAILURE" = "SUCCESS";
