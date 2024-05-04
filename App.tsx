@@ -11,6 +11,7 @@ import AnimatedStatusBar from "@components/AnimatedStatusBar";
 import { StatusBarProvider } from "src/contexts/StatusBarContext";
 import Conclusion from "@screens/Conclusion";
 import Meal from "@screens/Meal";
+import Home from "@screens/Home";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -21,7 +22,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       {fontsLoaded && (
         <StatusBarProvider>
-          <Meal />
+          <Home />
           <AnimatedStatusBar />
         </StatusBarProvider>
       )}
