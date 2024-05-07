@@ -10,15 +10,6 @@ export const Container = styled(Animated.createAnimatedComponent(View))`
   position: relative;
 `;
 
-export const Title = styled.Text`
-  ${({ theme }) => css`
-    font-size: ${theme.FONT_SIZE.XXL}px;
-    font-family: ${theme.FONT_FAMILY.BOLD};
-    color: ${theme.COLORS.GRAY_700};
-    line-height: ${theme.FONT_SIZE.XXL * 1.3}px;
-  `}
-  text-align: center;
-`;
 export const Subtitle = styled.Text`
   ${({ theme }) => css`
     font-size: ${theme.FONT_SIZE.SM}px;

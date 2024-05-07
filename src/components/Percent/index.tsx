@@ -1,8 +1,9 @@
 import React from "react";
-import { Container, IconContainer, Subtitle, Title } from "./styles";
+import { Container, IconContainer, Subtitle } from "./styles";
 import { Animated } from "react-native";
 import { useTheme } from "styled-components/native";
 import ArrowUpRight from "phosphor-react-native/src/icons/ArrowUpRight";
+import AnimatedNumber from "@components/AnimatedNumber";
 
 type Props = {
   oldValue: number;
@@ -14,20 +15,6 @@ const Percent = ({ oldValue, newValue }: Props) => {
   const theme = useTheme();
   const [percent, setPercent] = React.useState(oldValue);
   let x = 0;
-
-  function percentAnimate() {
-    const increment = newValue / 100;
-
-    const incrementInterval = setInterval(() => {
-      if (percent >= newValue) {
-        console.log("maior");
-        clearInterval(incrementInterval);
-        setPercent(newValue);
-      } else {
-        setPercent((current) => current + increment);
-      }
-    }, Math.random() * 25);
-  }
 
   function handleChange() {
     Animated.timing(status, {
@@ -51,10 +38,26 @@ const Percent = ({ oldValue, newValue }: Props) => {
   });
 
   React.useEffect(() => {
+    let interval: NodeJS.Timeout;
+    function percentAnimate() {
+      const increment = newValue / 100;
+
+      interval = setInterval(() => {
+        console.log(percent);
+        if (percent >= newValue) {
+          clearInterval(interval);
+          setPercent(newValue);
+        } else {
+          setPercent((current) => current + increment);
+        }
+      }, Math.random() * 25);
+    }
+
     handleChange();
-    percentAnimate();
-    x = x + 1;
-    console.log(x);
+    /* percentAnimate(); */
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -67,7 +70,8 @@ const Percent = ({ oldValue, newValue }: Props) => {
           }
         ></ArrowUpRight>
       </IconContainer>
-      <Title>{`${percent}%`}</Title>
+      {/* <Title>{`${percent}%`}</Title> */}
+      <AnimatedNumber oldValue={oldValue} newValue={newValue} />
       <Subtitle>{`das refeições ${
         newValue > 50 ? "dentro" : "fora"
       } da dieta`}</Subtitle>
