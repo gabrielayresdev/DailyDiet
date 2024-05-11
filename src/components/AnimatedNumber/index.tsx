@@ -1,7 +1,4 @@
 import React from "react";
-import { useSpring } from "react-spring";
-import { animated } from "@react-spring/native";
-import { Animated, Easing, Text } from "react-native";
 import { Title } from "./styles";
 
 type Props = {
