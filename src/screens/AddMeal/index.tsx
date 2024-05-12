@@ -14,7 +14,7 @@ import { View } from "react-native";
 import Select from "@components/Select";
 import Button from "@components/Button";
 
-const AddMead = () => {
+const AddMeal = () => {
   const theme = useTheme();
   const context = useStatusBar();
   context?.handleChange("LIGHT_GRAY", 0);
@@ -50,4 +50,4 @@ const AddMead = () => {
   );
 };
 
-export default AddMead;
+export default AddMeal;
