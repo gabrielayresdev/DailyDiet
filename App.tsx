@@ -12,6 +12,8 @@ import { StatusBarProvider } from "src/contexts/StatusBarContext";
 import Conclusion from "@screens/Conclusion";
 import Meal from "@screens/Meal";
 import Home from "@screens/Home";
+import { AppRoutes } from "@routes/app.routes";
+import { Routes } from "@routes/index";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -22,7 +24,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       {fontsLoaded && (
         <StatusBarProvider>
-          <Home />
+          <Routes />
           <AnimatedStatusBar />
         </StatusBarProvider>
       )}

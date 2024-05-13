@@ -9,14 +9,14 @@ type Props = ViewProps & {
   title: string;
   type?: ButtonTypeStyleProps;
   fill?: boolean;
-  handlePress?: () => void;
+  onPress?: () => void;
 };
 
 const Button = ({
   CustomIcon,
   title,
   type = "PRIMARY",
-  handlePress,
+  onPress,
   fill = true,
   ...rest
 }: Props) => {
@@ -50,6 +50,7 @@ const Button = ({
     <TouchableWithoutFeedback
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
+      onPress={onPress}
     >
       <Container style={{ backgroundColor: buttonColor }} fill={fill} {...rest}>
         {CustomIcon && (
