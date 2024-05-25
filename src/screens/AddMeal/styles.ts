@@ -8,11 +8,14 @@ export const Container = styled.View`
 export const Form = styled.View`
   flex: 1;
   gap: 24px;
+
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
   padding: 40px 24px;
+
+  position: relative;
 `;
 
 export const FormRow = styled.View`
@@ -30,5 +33,5 @@ export const SelectTitle = styled.Text`
 `;
 
 export const ButtonContainer = styled.View`
-  margin-top: auto;
+  margin-top: 30px;
 `;

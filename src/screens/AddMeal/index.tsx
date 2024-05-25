@@ -10,7 +10,7 @@ import {
 import { useTheme } from "styled-components/native";
 import { useStatusBar } from "src/contexts/StatusBarContext";
 import Input from "@components/Input";
-import { Alert, View } from "react-native";
+import { Alert, KeyboardAvoidingView, View } from "react-native";
 import Select from "@components/Select";
 import Button from "@components/Button";
 import { mealCreate } from "@storage/meal/mealCreate";
@@ -65,6 +65,7 @@ const AddMeal = () => {
           <SelectTitle>Está dentro da dieta?</SelectTitle>
           <Select option={option} setOption={setOption} />
         </View>
+
         <ButtonContainer>
           <Button title="Cadastrar refeição" onPress={handleNewMeal} />
         </ButtonContainer>
