@@ -10,7 +10,13 @@ import {
 import { useTheme } from "styled-components/native";
 import { useStatusBar } from "src/contexts/StatusBarContext";
 import Input from "@components/Input";
-import { Alert, KeyboardAvoidingView, View } from "react-native";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+} from "react-native";
 import Select from "@components/Select";
 import Button from "@components/Button";
 import { mealCreate } from "@storage/meal/mealCreate";
@@ -49,27 +55,63 @@ const AddMeal = () => {
   return (
     <Container>
       <Header title="Nova refeição" color={theme.COLORS.GRAY_300} />
-      <Form>
-        <Input value={name} setValue={setName} label="Nome" />
-        <Input
-          value={description}
-          setValue={setDescription}
-          label="Descrição"
-          numberOfLines={4}
-        />
-        <FormRow>
-          <Input value={date} setValue={setDate} label="Data" />
-          <Input value={hour} setValue={setHour} label="Hora" />
-        </FormRow>
-        <View>
-          <SelectTitle>Está dentro da dieta?</SelectTitle>
-          <Select option={option} setOption={setOption} />
-        </View>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <KeyboardAvoidingView style={{ flex: 1 }}>
+          <Form>
+            <Input value={name} setValue={setName} label="Nome" />
+            <Input
+              value={description}
+              setValue={setDescription}
+              label="Descrição"
+              numberOfLines={4}
+            />
+            <FormRow>
+              <Input value={date} setValue={setDate} label="Data" />
+              <Input value={hour} setValue={setHour} label="Hora" />
+            </FormRow>
+            <View>
+              <SelectTitle>Está dentro da dieta?</SelectTitle>
+              <Select option={option} setOption={setOption} />
+            </View>
 
-        <ButtonContainer>
-          <Button title="Cadastrar refeição" onPress={handleNewMeal} />
-        </ButtonContainer>
-      </Form>
+            <ButtonContainer>
+              <Button title="Cadastrar refeição" onPress={handleNewMeal} />
+            </ButtonContainer>
+          </Form>
+        </KeyboardAvoidingView>
+      </ScrollView>
+    </Container>
+  );
+
+  return (
+    <Container>
+      <Header title="Nova refeição" color={theme.COLORS.GRAY_300} />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <Form>
+          <Input value={name} setValue={setName} label="Nome" />
+          <Input
+            value={description}
+            setValue={setDescription}
+            label="Descrição"
+            numberOfLines={4}
+          />
+          <FormRow>
+            <Input value={date} setValue={setDate} label="Data" />
+            <Input value={hour} setValue={setHour} label="Hora" />
+          </FormRow>
+          <View>
+            <SelectTitle>Está dentro da dieta?</SelectTitle>
+            <Select option={option} setOption={setOption} />
+          </View>
+
+          <ButtonContainer>
+            <Button title="Cadastrar refeição" onPress={handleNewMeal} />
+          </ButtonContainer>
+        </Form>
+      </KeyboardAvoidingView>
     </Container>
   );
 };

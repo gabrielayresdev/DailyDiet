@@ -33,5 +33,5 @@ export const SelectTitle = styled.Text`
 `;
 
 export const ButtonContainer = styled.View`
-  margin-top: 30px;
+  margin-top: auto;
 `;
