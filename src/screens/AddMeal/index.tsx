@@ -20,8 +20,9 @@ import {
 import Select from "@components/Select";
 import Button from "@components/Button";
 import { mealCreate } from "@storage/meal/mealCreate";
-import { MealType } from "@customTypes/meal";
 import { mealGetAll } from "@storage/meal/mealGetAll";
+import { useNavigation } from "@react-navigation/native";
+import { mealRemoveAll } from "@storage/meal/mealRemoveAll";
 
 const AddMeal = () => {
   const theme = useTheme();
@@ -32,6 +33,7 @@ const AddMeal = () => {
   const [date, setDate] = React.useState("");
   const [hour, setHour] = React.useState("");
   const [option, setOption] = React.useState<0 | 1 | null>(null);
+  const navigation = useNavigation();
 
   async function handleNewMeal() {
     try {
@@ -39,13 +41,14 @@ const AddMeal = () => {
         const meal = {
           name,
           description,
-          date,
+          date: new Date(date.split("/").reverse().join("-")),
           hour,
           onDiet: option === 1,
         };
         await mealCreate(meal);
         const meals = await mealGetAll();
         console.log(meals);
+        navigation.navigate("home");
       }
     } catch (error) {
       Alert.alert("New Meal", "Não foi possível adicionar uma nova refeição.");

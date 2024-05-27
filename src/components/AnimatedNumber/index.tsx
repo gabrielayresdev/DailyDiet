@@ -11,7 +11,7 @@ const AnimatedNumber = ({ oldValue, newValue }: Props) => {
 
   React.useEffect(() => {
     const startTime = Date.now();
-    const endTime = startTime + 3000;
+    const endTime = startTime + 700;
     const difference = newValue - oldValue;
 
     const updateNumber = () => {
@@ -29,7 +29,7 @@ const AnimatedNumber = ({ oldValue, newValue }: Props) => {
     updateNumber();
   }, [oldValue, newValue]);
 
-  return <Title>{currentNumber}</Title>;
+  return <Title>{currentNumber}%</Title>;
 };
 
 export default AnimatedNumber;

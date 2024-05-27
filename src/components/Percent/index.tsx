@@ -19,7 +19,7 @@ const Percent = ({ oldValue, newValue }: Props) => {
   function handleChange() {
     Animated.timing(status, {
       toValue: 1,
-      duration: 1000,
+      duration: 500,
       useNativeDriver: false,
     }).start();
   }

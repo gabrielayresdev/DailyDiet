@@ -9,7 +9,7 @@ type Props = TextInputProps & {
   setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Input = ({ label, value, setValue, ...rest }: Props) => {
+const Input = ({ label, value, setValue }: Props) => {
   const isFocused = new Animated.Value(0);
   const theme = useTheme();
 
@@ -40,7 +40,6 @@ const Input = ({ label, value, setValue, ...rest }: Props) => {
     <Container>
       {label && <Label>{label}</Label>}
       <InputField
-        {...rest}
         onFocus={handleFocus}
         onBlur={handleBlur}
         style={{ borderColor: BorderColor }}
