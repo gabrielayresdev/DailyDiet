@@ -8,9 +8,13 @@ import { MealType } from "@customTypes/meal";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { mealGetAll } from "@storage/meal/mealGetAll";
 import { mealRemoveAll } from "@storage/meal/mealRemoveAll";
+import { dateFormat } from "@utils/dateFormat";
+import MealList from "@components/MealList";
+
+export type MealGrouped = { [key: string]: MealType[] };
 
 const Home = () => {
-  const [meals, setMeals] = React.useState<MealType[] | null>(null);
+  const [meals, setMeals] = React.useState<MealGrouped | null>(null);
   const navigation = useNavigation();
 
   useFocusEffect(
@@ -18,11 +22,17 @@ const Home = () => {
       async function getMeals() {
         const storage = await mealGetAll();
         setMeals(() => {
-          const order = storage.sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-          );
-          console.log(order);
-          return order;
+          const groupedMeals = storage.reduce<MealGrouped>((groups, meal) => {
+            const date = new Date(meal.date);
+            const formatedDate = dateFormat(date);
+            if (!groups[formatedDate]) {
+              groups[formatedDate] = [];
+            }
+            groups[formatedDate].push(meal);
+            return groups;
+          }, {});
+          console.log(groupedMeals);
+          return groupedMeals;
         });
       }
       getMeals();
@@ -41,10 +51,14 @@ const Home = () => {
           />
         </MealHeader>
 
-        <FlatList
-          data={meals}
-          renderItem={({ item }) => <Text>{item.name}</Text>}
-        />
+        {meals && (
+          <FlatList
+            data={Object.keys(meals)}
+            renderItem={({ item }) => (
+              <MealList key={item} title={item} meals={meals[item]} />
+            )}
+          />
+        )}
       </Meals>
     </Container>
   );

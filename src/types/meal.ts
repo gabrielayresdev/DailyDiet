@@ -1,7 +1,7 @@
 export type MealType = {
   name: string;
   description: string;
-  date: Date;
+  date: string;
   hour: string;
   onDiet: boolean;
 };
