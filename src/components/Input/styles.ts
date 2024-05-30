@@ -2,8 +2,8 @@ import styled, { css } from "styled-components/native";
 import { Animated, TextInput } from "react-native";
 
 export const Container = styled.View`
-  width: 100%;
   gap: 4px;
+  width: 100%;
 `;
 
 export const InputField = styled(

@@ -19,8 +19,14 @@ export const Form = styled.View`
 `;
 
 export const FormRow = styled.View`
+  width: 100%;
   flex-direction: row;
+  flex-shrink: 1;
   gap: 20px;
+`;
+
+export const FormContainer = styled.View`
+  flex: 1;
 `;
 
 export const SelectTitle = styled.Text`

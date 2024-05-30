@@ -4,6 +4,7 @@ import {
   ButtonContainer,
   Container,
   Form,
+  FormContainer,
   FormRow,
   SelectTitle,
 } from "./styles";
@@ -41,7 +42,7 @@ const AddMeal = () => {
         const meal = {
           name,
           description,
-          date: new Date(date.split("/").reverse().join("-")),
+          date: new Date(date.split("/").reverse().join("-")).toString(),
           hour,
           onDiet: option === 1,
         };
@@ -69,8 +70,12 @@ const AddMeal = () => {
               numberOfLines={4}
             />
             <FormRow>
-              <Input value={date} setValue={setDate} label="Data" />
-              <Input value={hour} setValue={setHour} label="Hora" />
+              <FormContainer>
+                <Input value={hour} setValue={setHour} label="Hora" />
+              </FormContainer>
+              <FormContainer>
+                <Input value={date} setValue={setDate} label="Data" />
+              </FormContainer>
             </FormRow>
             <View>
               <SelectTitle>Está dentro da dieta?</SelectTitle>
