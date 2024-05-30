@@ -1,17 +1,21 @@
 import React from "react";
-import { Container, InputField, Label } from "./styles";
+import { Container, Error, InputField, InputHeader, Label } from "./styles";
 import { Animated, TextInputProps } from "react-native";
 import { useTheme } from "styled-components/native";
+import { Controller, UseFormReturn } from "react-hook-form";
 
 type Props = TextInputProps & {
   label?: string;
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  form: UseFormReturn<any>;
+  name: string;
 };
 
-const Input = ({ label, value, setValue }: Props) => {
+const Input = ({ label, form, name }: Props) => {
   const isFocused = new Animated.Value(0);
   const theme = useTheme();
+
+  const inputRef = React.useRef<string>();
+  inputRef.current = form.watch(name, "");
 
   // Handles with input color change animations
   const handleFocus = () => {
@@ -31,20 +35,39 @@ const Input = ({ label, value, setValue }: Props) => {
   const BorderColor = isFocused.interpolate({
     inputRange: [0, 1],
     outputRange:
-      value.trim().length === 0
+      inputRef!.current!.trim().length === 0
         ? [theme.COLORS.GRAY_300, theme.COLORS.GRAY_500]
         : [theme.COLORS.GRAY_500, theme.COLORS.GRAY_300],
   });
+
   //
   return (
     <Container>
-      {label && <Label>{label}</Label>}
-      <InputField
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        style={{ borderColor: BorderColor }}
-        value={value}
-        onChangeText={setValue}
+      <InputHeader>
+        <Label>{label ? label : ""}</Label>
+        <Error>
+          {form.formState?.errors[name]
+            ? `${form.formState?.errors[name]?.message}`
+            : ""}
+        </Error>
+      </InputHeader>
+      <Controller
+        control={form.control}
+        render={({ field: { onChange, value } }) => (
+          <InputField
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            style={{ borderColor: BorderColor }}
+            value={value}
+            onChangeText={(text) => {
+              onChange(text);
+            }}
+          />
+        )}
+        rules={{
+          required: "Campo obrigatório",
+        }}
+        name={name}
       />
     </Container>
   );

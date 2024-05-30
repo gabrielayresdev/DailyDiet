@@ -19,10 +19,25 @@ export const InputField = styled(
   border-radius: 6px;
 `;
 
+export const InputHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+`;
+
 export const Label = styled.Text`
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_600};
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-size: ${theme.FONT_SIZE.SM}px;
+  `}
+`;
+
+export const Error = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.COLORS.RED_MEDIUM};
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+    font-size: ${theme.FONT_SIZE.XS}px;
   `}
 `;

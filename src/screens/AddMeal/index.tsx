@@ -24,19 +24,33 @@ import { mealCreate } from "@storage/meal/mealCreate";
 import { mealGetAll } from "@storage/meal/mealGetAll";
 import { useNavigation } from "@react-navigation/native";
 import { mealRemoveAll } from "@storage/meal/mealRemoveAll";
+import { useForm } from "react-hook-form";
+
+type Data = {
+  name: string;
+  description: string;
+  date: string;
+  hour: string;
+};
 
 const AddMeal = () => {
   const theme = useTheme();
   const context = useStatusBar();
   context?.handleChange("LIGHT_GRAY", 0);
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [date, setDate] = React.useState("");
-  const [hour, setHour] = React.useState("");
+
   const [option, setOption] = React.useState<0 | 1 | null>(null);
   const navigation = useNavigation();
 
-  async function handleNewMeal() {
+  const form = useForm({
+    defaultValues: {
+      name: "",
+      description: "",
+      date: "",
+      hour: "",
+    },
+  });
+
+  async function onSubmit({ name, description, date, hour }: Data) {
     try {
       if (option !== null) {
         const meal = {
@@ -50,9 +64,20 @@ const AddMeal = () => {
         const meals = await mealGetAll();
         console.log(meals);
         navigation.navigate("home");
+      } else {
+        throw new Error(
+          "Por favor, nos diga se a sua refeição está dentro da dieta"
+        );
       }
     } catch (error) {
-      Alert.alert("New Meal", "Não foi possível adicionar uma nova refeição.");
+      if (error instanceof Error) {
+        Alert.alert("New Meal", error.message);
+      } else {
+        Alert.alert(
+          "New Meal",
+          "Não foi possível adicionar uma nova refeição."
+        );
+      }
     }
   }
 
@@ -62,19 +87,19 @@ const AddMeal = () => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <KeyboardAvoidingView style={{ flex: 1 }}>
           <Form>
-            <Input value={name} setValue={setName} label="Nome" />
+            <Input form={form} name="name" label="Nome" />
             <Input
-              value={description}
-              setValue={setDescription}
+              form={form}
+              name="description"
               label="Descrição"
               numberOfLines={4}
             />
             <FormRow>
               <FormContainer>
-                <Input value={hour} setValue={setHour} label="Hora" />
+                <Input form={form} name="date" label="Data" />
               </FormContainer>
               <FormContainer>
-                <Input value={date} setValue={setDate} label="Data" />
+                <Input form={form} name="hour" label="Hora" />
               </FormContainer>
             </FormRow>
             <View>
@@ -83,43 +108,14 @@ const AddMeal = () => {
             </View>
 
             <ButtonContainer>
-              <Button title="Cadastrar refeição" onPress={handleNewMeal} />
+              <Button
+                title="Cadastrar refeição"
+                onPress={form.handleSubmit(onSubmit)}
+              />
             </ButtonContainer>
           </Form>
         </KeyboardAvoidingView>
       </ScrollView>
-    </Container>
-  );
-
-  return (
-    <Container>
-      <Header title="Nova refeição" color={theme.COLORS.GRAY_300} />
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-      >
-        <Form>
-          <Input value={name} setValue={setName} label="Nome" />
-          <Input
-            value={description}
-            setValue={setDescription}
-            label="Descrição"
-            numberOfLines={4}
-          />
-          <FormRow>
-            <Input value={date} setValue={setDate} label="Data" />
-            <Input value={hour} setValue={setHour} label="Hora" />
-          </FormRow>
-          <View>
-            <SelectTitle>Está dentro da dieta?</SelectTitle>
-            <Select option={option} setOption={setOption} />
-          </View>
-
-          <ButtonContainer>
-            <Button title="Cadastrar refeição" onPress={handleNewMeal} />
-          </ButtonContainer>
-        </Form>
-      </KeyboardAvoidingView>
     </Container>
   );
 };
