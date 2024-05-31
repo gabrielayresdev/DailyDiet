@@ -14,6 +14,7 @@ const MealList = ({ title, meals }: Props) => {
     <Container>
       <Title>{title}</Title>
       <FlatList
+        style={{ gap: 8 }}
         data={meals}
         renderItem={({ item }) => <MealItem meal={item} />}
       />

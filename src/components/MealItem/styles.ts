@@ -6,6 +6,11 @@ export const Container = styled.View`
   gap: 12px;
   padding: 14px 16px 14px 12px;
   align-items: center;
+
+  ${({ theme }) => css`
+    border: 1px solid ${theme.COLORS.GRAY_300};
+    border-radius: 6px;
+  `}
 `;
 
 export const Hour = styled.Text`

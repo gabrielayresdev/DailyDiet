@@ -3,7 +3,7 @@ import { Container, MealHeader, Meals, Title } from "./styles";
 import Percent from "@components/Percent";
 import Button from "@components/Button";
 import Plus from "phosphor-react-native/src/icons/Plus";
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
 import { MealType } from "@customTypes/meal";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { mealGetAll } from "@storage/meal/mealGetAll";

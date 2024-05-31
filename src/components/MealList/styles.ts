@@ -3,6 +3,7 @@ import { css } from "styled-components/native";
 
 export const Container = styled.View`
   gap: 8px;
+  margin-bottom: 32px;
 `;
 
 export const Title = styled.Text`
