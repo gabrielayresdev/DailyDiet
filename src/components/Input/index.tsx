@@ -2,15 +2,21 @@ import React from "react";
 import { Container, Error, InputField, InputHeader, Label } from "./styles";
 import { Animated, TextInputProps } from "react-native";
 import { useTheme } from "styled-components/native";
-import { Controller, UseFormReturn } from "react-hook-form";
+import { Controller, RegisterOptions, UseFormReturn } from "react-hook-form";
 
 type Props = TextInputProps & {
   label?: string;
   form: UseFormReturn<any>;
   name: string;
+  rules?:
+    | Omit<
+        RegisterOptions<any, string>,
+        "disabled" | "valueAsNumber" | "valueAsDate" | "setValueAs"
+      >
+    | undefined;
 };
 
-const Input = ({ label, form, name }: Props) => {
+const Input = ({ label, form, name, rules }: Props) => {
   const isFocused = new Animated.Value(0);
   const theme = useTheme();
 
@@ -64,9 +70,7 @@ const Input = ({ label, form, name }: Props) => {
             }}
           />
         )}
-        rules={{
-          required: "Campo obrigatório",
-        }}
+        rules={rules}
         name={name}
       />
     </Container>

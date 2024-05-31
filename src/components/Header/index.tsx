@@ -1,5 +1,7 @@
 import React from "react";
 import { BackIcon, Container, Title } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native";
 
 type Props = {
   title: string;
@@ -7,9 +9,12 @@ type Props = {
 };
 
 const Header = ({ title, color }: Props) => {
+  const navigation = useNavigation();
   return (
     <Container color={color}>
-      <BackIcon />
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <BackIcon />
+      </TouchableOpacity>
       <Title>{title}</Title>
     </Container>
   );

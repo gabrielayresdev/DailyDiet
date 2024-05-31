@@ -11,19 +11,12 @@ import {
 import { useTheme } from "styled-components/native";
 import { useStatusBar } from "src/contexts/StatusBarContext";
 import Input from "@components/Input";
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  View,
-} from "react-native";
+import { Alert, KeyboardAvoidingView, ScrollView, View } from "react-native";
 import Select from "@components/Select";
 import Button from "@components/Button";
 import { mealCreate } from "@storage/meal/mealCreate";
 import { mealGetAll } from "@storage/meal/mealGetAll";
 import { useNavigation } from "@react-navigation/native";
-import { mealRemoveAll } from "@storage/meal/mealRemoveAll";
 import { useForm } from "react-hook-form";
 
 type Data = {
@@ -49,6 +42,10 @@ const AddMeal = () => {
       hour: "",
     },
   });
+
+  const required = {
+    required: "Campo obrigatório",
+  };
 
   async function onSubmit({ name, description, date, hour }: Data) {
     try {
@@ -87,19 +84,20 @@ const AddMeal = () => {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <KeyboardAvoidingView style={{ flex: 1 }}>
           <Form>
-            <Input form={form} name="name" label="Nome" />
+            <Input form={form} name="name" label="Nome" rules={required} />
             <Input
               form={form}
               name="description"
               label="Descrição"
               numberOfLines={4}
+              rules={required}
             />
             <FormRow>
               <FormContainer>
-                <Input form={form} name="date" label="Data" />
+                <Input form={form} name="date" label="Data" rules={required} />
               </FormContainer>
               <FormContainer>
-                <Input form={form} name="hour" label="Hora" />
+                <Input form={form} name="hour" label="Hora" rules={required} />
               </FormContainer>
             </FormRow>
             <View>
