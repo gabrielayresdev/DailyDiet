@@ -16,8 +16,9 @@ import Select from "@components/Select";
 import Button from "@components/Button";
 import { mealCreate } from "@storage/meal/mealCreate";
 import { mealGetAll } from "@storage/meal/mealGetAll";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
+import { MealType } from "@customTypes/meal";
 
 type Data = {
   name: string;
@@ -34,13 +35,23 @@ const AddMeal = () => {
   const [option, setOption] = React.useState<0 | 1 | null>(null);
   const navigation = useNavigation();
 
+  const route = useRoute();
+  const { meal } = route.params as MealType;
+
   const form = useForm({
-    defaultValues: {
-      name: "",
-      description: "",
-      date: "",
-      hour: "",
-    },
+    defaultValues: meal
+      ? {
+          name: meal.name,
+          description: meal.desciption,
+          date: meal.date,
+          hour: meal.hour,
+        }
+      : {
+          name: "",
+          description: "",
+          date: "",
+          hour: "",
+        },
   });
 
   const required = {

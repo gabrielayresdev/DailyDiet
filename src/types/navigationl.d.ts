@@ -1,13 +1,14 @@
+import { MealType } from "./meal";
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       home: undefined;
-      addMeal: undefined;
+      addMeal: {
+        meal?: MealType;
+      };
       conclusion: {
         type: "SUCCESS" | "FAILURE";
-      };
-      meal: {
-        id: string;
       };
     }
   }
