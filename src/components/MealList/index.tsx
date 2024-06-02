@@ -21,7 +21,7 @@ const MealList = ({ title, meals }: Props) => {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("addMeal", {
+              navigation.navigate("meal", {
                 meal: item,
               })
             }

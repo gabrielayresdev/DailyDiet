@@ -1,7 +1,7 @@
 import React from "react";
 import { Circle, Container, Option, Title } from "./styles";
 
-export type Options = 0 | 1 | null;
+export type Options = boolean | null;
 
 type Props = {
   option: Options;
@@ -13,16 +13,16 @@ const Select = ({ option, setOption }: Props) => {
     <Container>
       <Option
         type="PRIMARY"
-        selected={option === 1}
-        onPress={() => setOption(1)}
+        selected={option === true}
+        onPress={() => setOption(true)}
       >
         <Circle type="PRIMARY" />
         <Title>Sim</Title>
       </Option>
       <Option
         type="SECONDARY"
-        selected={option === 0}
-        onPress={() => setOption(0)}
+        selected={option === false}
+        onPress={() => setOption(false)}
       >
         <Circle type="SECONDARY" />
         <Title>Não</Title>
