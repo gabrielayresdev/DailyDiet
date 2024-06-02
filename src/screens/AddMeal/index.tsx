@@ -9,6 +9,7 @@ import { mealGetAll } from "@storage/meal/mealGetAll";
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import MealForm from "@components/MealForm";
+import { v4 as uuidv4 } from "uuid";
 
 type Data = {
   name: string;
@@ -42,6 +43,7 @@ const AddMeal = () => {
     try {
       if (option !== null) {
         const meal = {
+          id: uuidv4(),
           name,
           description,
           date: new Date(date.split("/").reverse().join("-")).toString(),

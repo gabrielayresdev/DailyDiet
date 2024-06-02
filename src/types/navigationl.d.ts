@@ -5,9 +5,7 @@ export declare global {
     interface RootParamList {
       home: undefined;
       addMeal: undefined;
-      meal: {
-        meal?: MealType;
-      };
+      editMeal: MealType;
       conclusion: {
         type: "SUCCESS" | "FAILURE";
       };

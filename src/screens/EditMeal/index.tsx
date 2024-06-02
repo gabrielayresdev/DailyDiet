@@ -2,11 +2,21 @@ import React from "react";
 import { Container } from "./styles";
 import Header from "@components/Header";
 import MealForm from "@components/MealForm";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { MealType } from "@customTypes/meal";
 import { useTheme } from "styled-components";
 import { useStatusBar } from "src/contexts/StatusBarContext";
 import { useForm } from "react-hook-form";
+import { mealUpdate } from "@storage/meal/mealUpdate";
+import { mealGetAll } from "@storage/meal/mealGetAll";
+import { Alert } from "react-native";
+
+type Data = {
+  name: string;
+  description: string;
+  date: string;
+  hour: string;
+};
 
 const EditMeal = () => {
   const theme = useTheme();
@@ -14,7 +24,10 @@ const EditMeal = () => {
   context?.handleChange("LIGHT_GRAY", 0);
 
   const route = useRoute();
-  const { meal } = route.params as MealType;
+  const meal = route.params as MealType;
+  console.log(meal.meal);
+
+  const navigation = useNavigation();
 
   const form = useForm({
     defaultValues: {
@@ -25,11 +38,35 @@ const EditMeal = () => {
     },
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async ({ name, description, date, hour }: Data) => {
     try {
-      console.log(form.getValues());
+      if (option !== null) {
+        const data = {
+          id: meal.id,
+          name,
+          description,
+          date: new Date(date.split("/").reverse().join("-")).toString(),
+          hour,
+          onDiet: option,
+        };
+        await mealUpdate(data);
+        const meals = await mealGetAll();
+        console.log(meals);
+        navigation.navigate("home");
+      } else {
+        throw new Error(
+          "Por favor, nos diga se a sua refeição está dentro da dieta"
+        );
+      }
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        Alert.alert("New Meal", error.message);
+      } else {
+        Alert.alert(
+          "New Meal",
+          "Não foi possível adicionar uma nova refeição."
+        );
+      }
     }
   };
 

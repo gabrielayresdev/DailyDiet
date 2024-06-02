@@ -7,7 +7,6 @@ import { FlatList } from "react-native";
 import { MealType } from "@customTypes/meal";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { mealGetAll } from "@storage/meal/mealGetAll";
-import { mealRemoveAll } from "@storage/meal/mealRemoveAll";
 import { dateFormat } from "@utils/dateFormat";
 import MealList from "@components/MealList";
 
