@@ -19,9 +19,7 @@ const MealList = ({ title, meals }: Props) => {
         style={{ gap: 8 }}
         data={meals}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => navigation.navigate("editMeal", item)}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate("meal", item)}>
             <MealItem meal={item} />
           </TouchableOpacity>
         )}

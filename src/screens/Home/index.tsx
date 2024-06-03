@@ -9,12 +9,20 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { mealGetAll } from "@storage/meal/mealGetAll";
 import { dateFormat } from "@utils/dateFormat";
 import MealList from "@components/MealList";
+import { useTheme } from "styled-components";
+import { useStatusBar } from "src/contexts/StatusBarContext";
 
 export type MealGrouped = { [key: string]: MealType[] };
 
 const Home = () => {
   const [meals, setMeals] = React.useState<MealGrouped | null>(null);
   const navigation = useNavigation();
+
+  const statusBarContext = useStatusBar();
+
+  useFocusEffect(
+    React.useCallback(() => statusBarContext.handleChange("WHITE"), [])
+  );
 
   useFocusEffect(
     React.useCallback(() => {

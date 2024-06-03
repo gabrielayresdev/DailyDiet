@@ -7,7 +7,6 @@ import {
   Circle,
   Container,
   Content,
-  MealTypeStyleProps,
   Paragraph,
   Status,
   Subtitle,
@@ -19,45 +18,49 @@ import PencilSimpleLine  from "phosphor-react-native/"; */
 
 import PencilSimpleLine from "phosphor-react-native/src/icons/PencilSimpleLine";
 import Trash from "phosphor-react-native/src/icons/Trash";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { MealType } from "@customTypes/meal";
+import { dateFormat } from "@utils/dateFormat";
 
 const Meal = () => {
   const theme = useTheme();
-  const type: MealTypeStyleProps = "SUCCESS";
   const statusBarContext = useStatusBar();
 
+  const route = useRoute();
+  const meal = route.params as MealType;
+
+  const navigation = useNavigation();
+
   React.useEffect(() => {
-    statusBarContext.handleChange(
-      type === "SUCCESS" ? "LIGHT_GREEN" : "LIGHT_RED",
-      0
-    );
+    statusBarContext.handleChange(meal.onDiet ? "LIGHT_GREEN" : "LIGHT_RED", 0);
   }, [statusBarContext]);
   return (
-    <Container type={type}>
+    <Container onDiet={meal.onDiet}>
       <Header
         title="Refeição"
-        color={
-          type === "SUCCESS" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT
-        }
+        color={meal.onDiet ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT}
       />
       <Content>
         <TextGroupContainer>
-          <Title>Sanduíche</Title>
-          <Paragraph>
-            Sanduíche de pão integral com atum e salada de alface e tomate
-          </Paragraph>
+          <Title>{meal.name}</Title>
+          <Paragraph>{meal.description}</Paragraph>
         </TextGroupContainer>
         <TextGroupContainer>
           <Subtitle>Data e hora</Subtitle>
-          <Paragraph>12/08/2022 às 16:00</Paragraph>
+          <Paragraph>{`${dateFormat(new Date(meal.date))} às ${
+            meal.hour
+          }`}</Paragraph>
         </TextGroupContainer>
         <Status>
-          <Circle type={type} />
-          <Paragraph>{`${
-            type === "SUCCESS" ? "dentro" : "fora"
-          } da dieta`}</Paragraph>
+          <Circle onDiet={meal.onDiet} />
+          <Paragraph>{`${meal.onDiet ? "dentro" : "fora"} da dieta`}</Paragraph>
         </Status>
         <ButtonContainer>
-          <Button CustomIcon={PencilSimpleLine} title="Editar refeição" />
+          <Button
+            CustomIcon={PencilSimpleLine}
+            title="Editar refeição"
+            onPress={() => navigation.navigate("editMeal", meal)}
+          />
           <Button
             CustomIcon={Trash}
             title="Excluir refeição"

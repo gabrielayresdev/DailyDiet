@@ -25,7 +25,7 @@ const EditMeal = () => {
 
   const route = useRoute();
   const meal = route.params as MealType;
-  console.log(meal.meal);
+  console.log(meal);
 
   const navigation = useNavigation();
 
@@ -52,7 +52,7 @@ const EditMeal = () => {
         await mealUpdate(data);
         const meals = await mealGetAll();
         console.log(meals);
-        navigation.navigate("home");
+        navigation.navigate("meal", data);
       } else {
         throw new Error(
           "Por favor, nos diga se a sua refeição está dentro da dieta"

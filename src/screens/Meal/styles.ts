@@ -1,14 +1,12 @@
 import styled, { css } from "styled-components/native";
 
-export type MealTypeStyleProps = "SUCCESS" | "FAILURE";
-
 type Props = {
-  type: MealTypeStyleProps;
+  onDiet: boolean;
 };
 
 export const Container = styled.View<Props>`
-  background-color: ${({ type, theme }) =>
-    type === "SUCCESS" ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+  background-color: ${({ onDiet, theme }) =>
+    onDiet ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
   flex: 1;
 `;
 
@@ -50,8 +48,8 @@ export const Paragraph = styled.Text`
 export const Circle = styled.View<Props>`
   width: 8px;
   height: 8px;
-  background-color: ${({ theme, type }) =>
-    type === "SUCCESS" ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
+  background-color: ${({ theme, onDiet }) =>
+    onDiet ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
   border-radius: 4px;
 `;
 
