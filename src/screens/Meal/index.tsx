@@ -21,6 +21,7 @@ import Trash from "phosphor-react-native/src/icons/Trash";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MealType } from "@customTypes/meal";
 import { dateFormat } from "@utils/dateFormat";
+import { mealRemove } from "@storage/meal/mealRemove";
 
 const Meal = () => {
   const theme = useTheme();
@@ -34,6 +35,16 @@ const Meal = () => {
   React.useEffect(() => {
     statusBarContext.handleChange(meal.onDiet ? "LIGHT_GREEN" : "LIGHT_RED", 0);
   }, [statusBarContext]);
+
+  const handleRemoveMeal = async () => {
+    try {
+      mealRemove(meal);
+      navigation.navigate("home");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container onDiet={meal.onDiet}>
       <Header
@@ -65,6 +76,7 @@ const Meal = () => {
             CustomIcon={Trash}
             title="Excluir refeição"
             type="SECONDARY"
+            onPress={handleRemoveMeal}
           />
         </ButtonContainer>
       </Content>
